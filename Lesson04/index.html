@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="password" id="mat-khau" value="Nhập vào đây" />
+    <button type="button" id="btn-mat-khau">Hiển thị mật khẩu</button>
+
+    <script>
+        //logic show/hide password
+        const oMatkhau = document.querySelector("#mat-khau");
+        const nut = document.querySelector("#btn-mat-khau");
+        nut.addEventListener("click", () =>{
+            const dangAn = oMatkhau.type === "password"
+            oMatkhau.type = dangAn ? "text" : "password"
+            nut.textContent = dangAn ? "Ẩn mật khẩu" : "Hiển thị mật khẩu"
+        })
+    </script>
+  </body>
+</html>
