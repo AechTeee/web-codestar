@@ -1,0 +1,13 @@
+.percent{
+    width: 50%;
+    height: 100px;
+    background-color: #ff0000;
+}
+
+html{
+    font-size: 20%;
+}
+
+.rem{
+    font-size: 2rem;
+}
