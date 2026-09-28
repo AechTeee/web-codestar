@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Form Text Area & Input Field -->
+    <form>
+        <h2><label for="textarea">Text Area</label></h2>
+            <textarea id="textarea" maxlength="140"></textarea><br>
+            <div class="textai" id="textareaLength">Max 0/140</div><br>
+        <h2><label for="inputField">Input Field</label></h2>
+            <input type="text" id="inputField" maxlength="20"><br>
+            <div class="textai" id="inputFieldCount">Maximum 0/20</div><br>
+    </form>
+
+    <!-- Track & count text = JavaScript  -->
+    <script>
+        const textarea = document.getElementById("textarea");
+        const textareaLength = document.getElementById("textareaLength");
+        const inputField = document.getElementById("inputField");
+        const inputFieldCount = document.getElementById("inputFieldCount");
+
+        textarea.addEventListener("input", () => {
+            const length = textarea.value.length;
+            textareaLength.textContent = `Max ${length}/140`;
+        });
+
+        inputField.addEventListener("input", () => {
+            const length = inputField.value.length;
+            inputFieldCount.textContent = `Maximum ${length}/20`;
+        });
+    </script>
+</body>
+</html>
