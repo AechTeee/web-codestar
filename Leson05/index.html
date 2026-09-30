@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đếm ngược OTP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="demo-box">
+        <button type="button" id="btn-otp">Gửi OTP</button>
+    </div>
+
+    <script>
+        const nut = document.querySelector("#btn-otp");
+
+        nut.addEventListener("click", () => {
+            let conlai = 10;    //So giay con lai
+            nut.disabled = true; //Khoa nut, khong cho bam nua
+            nut.textContent = `Gửi lại sau ${conlai}`; //cap nhat chu cho nut
+
+            const dem = setInterval(() => {
+                conlai--;   //giam 1s
+                nut.textContent = `Gửi lại sau ${conlai}`;
+                
+                if (conlai <= 0) {
+                    clearInterval(dem); //dung bo dem
+                    nut.disabled = false; //mo khoa nut, cho bam lai
+                    nut.textContent = "Gửi OTP"; //tra ve chu ban dau
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

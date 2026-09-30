@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <div class="demo-box">
+        <form id="form">
+            <label for="o-ten">Ten mon</label>
+            <input type="text" id="o-ten" name="o-ten" placeholder="VD: pizza" />
+            <button type="submit">Them mon</button>
+        </form>
+        <ul id="ds"></ul>
+    </div>
+
+    <script>
+        const from = document.querySelector("#form");
+        const oTen = document.querySelector("#o-ten");
+        const ds = document.querySelector("#ds");
+
+        from.addEventListener("submit", (e) => {
+            e.preventDefault(); //khong de trang web load lai
+            const ten = oTen.value.trim();
+            if (ten === "") return; //ten null bo qua
+
+            //tao dong moi
+            const li = document.createElement("li");
+
+            //ten mon an
+            const span = document.createElement("span");
+            span.textContent = ten;
+
+            const nutXoa = document.createElement("button");
+            nutXoa.type = "button"; //ko submit form
+            nutXoa.textContent = "X";
+            nutXoa.addEventListener("click", () => {
+                li.remove(); //xoa dung dong chua nut nay
+            });
+
+            li.append(span, nutXoa);
+            ds.append(li);
+
+            oTen.value =""; //clear input
+            oTen.focus(); //san sang nhap tiep mon moi
+        })
+
+    </script>
+</body>
+</html>

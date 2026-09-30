@@ -1,0 +1,35 @@
+body {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 16px;
+    line-height: 1.6;
+}
+
+.demo-box{
+    border: 1px solid #f72424;
+    padding: 12px;
+}
+
+.demo-box input{
+    padding: 6px 8px;
+    width: 200%;
+    max-width: 100%;
+}
+
+#ds{
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+}
+
+#ds li{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding: 8px 0;
+}
+
+#ds button{
+    cursor: pointer;
+}
