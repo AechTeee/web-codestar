@@ -7,6 +7,70 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="market-box">
+        <form id="form">
+            <label for="ds-cho">Danh sách đi chợ</label><br>        
+            <input type="text" id="ds-cho" name="ds-cho" placeholder="VD: cần tây, khoai, ..." required/>
+            <button type="submit">Thêm món</button><br>
+            <div class="text" id="soluongmon">Số món: 0/0</div>
+        </form>
+        <ul id="ds"></ul>
+    </div>
+
+    <script>
+        const from=document.querySelector("#form");
+        const dsCho=document.querySelector("#ds-cho");
+        const ds=document.querySelector("#ds");
+        const soluongmon=document.querySelector("#soluongmon");
+
+        from.addEventListener("submit",(e)=>{
+            e.preventDefault(); //khong de trang web load lai
+            const ten=dsCho.value.trim();
+            if(ten==="") return; //ten null bo qua
+
+            //tao dong moi
+            const li=document.createElement("li");
+
+            //count so mon sau khi them mon
+            function capNhatSoLuongMon(){
+                const soMon=ds.querySelectorAll("li").length;
+                soluongmon.textContent=`Số món:0/${soMon}`;
+            }
+
+            //count so mon sau khi ghach ngang
+            function capNhatSoLuongMonGachNgang(){
+                const soMonGachNgang=ds.querySelectorAll("li span.done").length;
+                soluongmon.textContent=`Số món: ${soMonGachNgang}/${ds.querySelectorAll("li").length}`;
+            }
+
+            //ten mon an
+            const span=document.createElement("span");
+            span.textContent=ten;
+            span.title="Bấm 1 lần để đánh dấu, bấm 2 lần (sau khi gạch) để xóa";
+
+            //bam 1 lan: gach ngang / bo gach ngang
+            span.addEventListener("click",()=>{
+                span.classList.toggle("done"); //gach ngang mon da chon
+                capNhatSoLuongMonGachNgang(); //cap nhat so mon sau khi gach ngang
+
+            });
+
+            //bam 2 lan: chi xoa duoc khi da gach ngang
+            span.addEventListener("dblclick",()=>{
+                if(!span.classList.contains("done")) return; //chua gach ngang -> chua duoc xoa
+                li.remove(); //xoa dung dong chua chu nay
+                capNhatSoLuongMon(); //cap nhat so mon sau khi xoa
+                capNhatSoLuongMonGachNgang(); //cap nhat so mon sau khi ghach ngang
+            });
+
+            li.append(span);
+            ds.append(li);
+
+            dsCho.value=""; //clear input
+            dsCho.focus(); //san sang nhap tiep mon moi
+            capNhatSoLuongMon(); //cap nhat so mon sau khi them mon
+        })
+    </script>
+
 </body>
 </html>
