@@ -1,6 +1,6 @@
 <?php
 // Cau hinh ket noi CSDL (dung chung voi Lesson09)
-$dsn = 'mysql:host=127.0.0.1;port=3306;dbname=web;charset=utf8';
+$dsn = 'mysql:host=localhost;port=3306;dbname=homework03;charset=utf8';
 
 try {
     $pdo = new PDO($dsn, 'root', '', [
