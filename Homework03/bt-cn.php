@@ -1,6 +1,6 @@
 <?php
-// Cau hinh ket noi CSDL (dung chung voi Lesson09)
-$dsn = 'mysql:host=localhost;port=3306;dbname=homework03;charset=utf8';
+$dsn = 'mysql:host=127.0.0.1;port=3306;dbname=web;charset=utf8';
+header("X-author=Hung Truong");
 
 try {
     $pdo = new PDO($dsn, 'root', '', [
@@ -22,22 +22,6 @@ $pdo->exec("
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB
 ");
-
-// Chen du lieu demo neu bang rong
-$count = (int)$pdo->query('SELECT COUNT(*) FROM products')->fetchColumn();
-if ($count === 0) {
-    $stmt = $pdo->prepare(
-        'INSERT INTO products (name, description, price, quantity) VALUES (?,?,?,?)'
-    );
-    $demo = [
-        ['Bánh mì', 'Bánh mì Hà Nội', 15000, 100],
-        ['Sữa', 'Sữa tươm 2%, 1L', 24000, 50],
-        ['Trứng', 'Trứng gà cúng đất', 35000, 30],
-    ];
-    foreach ($demo as $d) {
-        $stmt->execute($d);
-    }
-}
 
 // Xu ly hanh dong (Create / Update / Delete)
 $loi = '';
@@ -113,7 +97,7 @@ function money($n) {
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Quản lý sản phẩm - CRUD</title>
+    <title>Quản lý sản phẩm</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -153,7 +137,7 @@ function money($n) {
     </style>
 </head>
 <body>
-    <h1>Quản lý sản phẩm (CRUD)</h1>
+    <h1>Quản lý sản phẩm</h1>
 
     <?php if ($loi !== ''): ?>
         <p class="msg err"><?= htmlspecialchars($loi) ?></p>
