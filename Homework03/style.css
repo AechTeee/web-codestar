@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 860px;
+    margin: 40px auto;
+    padding: 0 16px;
+}
+
+h1 { 
+    color: #333; 
+}
+
+.form, .list {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
+label { 
+    display: block; margin: 8px 0 4px; font-weight: bold; 
+}
+
+input, textarea {
+    width: 100%; padding: 8px; box-sizing: border-box;
+    border: 1px solid #aaa; border-radius: 4px;
+}
+
+.btn {
+    display: inline-block; padding: 8px 16px; margin-top: 12px;
+    background: #8892bf; color: #fff; border: none; border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover { 
+    background: #6b749d; 
+}
+
+.danger { 
+    background: #e74c3c; 
+}
+
+.danger:hover { 
+    background: #c0392b; 
+}
+
+.info { 
+    background: #27ae60; 
+}
+
+.info:hover { 
+    background: #219653; 
+}
+
+.msg { 
+    padding: 8px; border-radius: 4px; margin-bottom: 12px; 
+}
+
+.err { 
+    background: #fdecea; color: #c0392b; border: 1px solid #f5c6cb; 
+}
+
+.ok { 
+    background: #e6f7ec; color: #219653; border: 1px solid #a5d6a7; 
+}
+
+table { 
+    width: 100%; border-collapse: collapse; 
+}
+
+th, td { 
+    border: 1px solid #ddd; padding: 8px; text-align: left; 
+}
+
+th { 
+    background: #f5f5f5; 
+}
+
+.actions a { 
+    margin-right: 6px; 
+}
