@@ -25,6 +25,15 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập Admin - Shop trà sữa</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .login-box { max-width: 400px; margin: 80px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .login-box h2 { text-align: center; color: #ff8f6b; margin-bottom: 20px; }
+        .login-box .form-group { margin-bottom: 15px; }
+        .login-box label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .login-box input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        .login-box .btn { width: 100%; }
+        .error-msg { background: #fee; color: #c33; padding: 10px; border-radius: 4px; margin-bottom: 15px; }
+    </style>
 </head>
 <body>
     <div class="login-box">

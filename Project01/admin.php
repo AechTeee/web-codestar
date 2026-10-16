@@ -1,5 +1,14 @@
 <?php
 session_start();
+// === login check ===
+if (empty($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    header('Location: login.php'); exit;
+}
+// === Logout ===
+if (($_GET['action'] ?? '') === 'logout') {
+    $_SESSION = []; session_destroy();
+    header('Location: login.php'); exit;
+}
 // === Kết nối SQL ===
 $host = 'localhost';
 $dbname = 'menu_db';
@@ -63,21 +72,6 @@ $orders = $pdo->query("SELECT * FROM orders ORDER BY created_at DESC")->fetchAll
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Shop trà sữa</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        body { background: #f0f2f5; }
-        .tab-nav { display: flex; gap: 0; margin-bottom: 20px; }
-        .tab-nav a { padding: 12px 25px; background: #ddd; text-decoration: none; color: #333; font-weight: bold; border-radius: 6px 6px 0 0; }
-        .tab-nav a.active { background: #ff8f6b; color: #fff; }
-        .card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .form-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
-        .form-row input, .form-row select, .form-row textarea { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
-        table { width: 100%; border-collapse: collapse; background: #fff; }
-        th, td { padding: 10px; border: 1px solid #eee; text-align: left; vertical-align: middle; }
-        th { background: #ff8f6b; color: #fff; }
-        .btn-sm { padding: 6px 12px; font-size: 14px; border: none; border-radius: 4px; cursor: pointer; color: #fff; }
-        .btn-edit { background: #4CAF50; } .btn-del { background: #f44336; } .btn-save { background: #2196F3; }
-        .alert { padding: 12px; background: #d4edda; border: 1px solid #c3e6cb; color: #155724; border-radius: 6px; margin-bottom: 15px; }
-    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -87,13 +81,14 @@ $orders = $pdo->query("SELECT * FROM orders ORDER BY created_at DESC")->fetchAll
                 <li><a href="menu.php">Trang chủ</a></li>
                 <li><a href="admin.php?tab=menu" class="<?php echo $tab==='menu'?'active':''; ?>">Quản lý menu</a></li>
                 <li><a href="admin.php?tab=orders" class="<?php echo $tab==='orders'?'active':''; ?>">Quản lý đơn hàng</a></li>
+                <li><a href="admin.php?action=logout" style="color:#fff; background:#e63946; padding:6px 12px; border-radius:4px;">Đăng xuất</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container">
         <?php if (isset($_GET['msg'])): ?>
-            <div class="alert">Thao tác thành công.</div>
+            <div class="alert-admin">Thao tác thành công.</div>
         <?php endif; ?>
 
         <div class="tab-nav">

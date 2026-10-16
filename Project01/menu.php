@@ -61,7 +61,7 @@
                 <div class="menu-price">40.000đ</div>
             </div>
         </div>
-        <div class="text-center">
+        <div class="text-dathangr">
             <a href="order.php" class="btn btn-primary">Đặt hàng ngay</a>
         </div>
     </section>
