@@ -1,16 +1,28 @@
 <?php
-$ordersFile = __DIR__ . '/orders.json';
-$orders = file_exists($ordersFile) ? json_decode(file_get_contents($ordersFile), true) : [];
+header("X-author=Hung Truong");
+
+// Kết nối SQL
+$host = 'localhost';
+$dbname = 'menu_db';
+$username = 'root';
+$password = '';
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die('Kết nối thất bại: ' . htmlspecialchars($e->getMessage()));
+}
+
+// tra cuu sdt
 $phone = trim($_GET['phone'] ?? '');
 $result = [];
 if ($phone) {
-    foreach ($orders as $o) {
-        if ($o['phone'] === $phone) {
-            $result[] = $o;
-        }
-    }
+    $stmt = $pdo->prepare("SELECT * FROM orders WHERE phone = :phone");
+    $stmt->execute(['phone' => $phone]);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>

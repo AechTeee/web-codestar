@@ -1,8 +1,18 @@
 <?php
-session_start();
-$ordersFile = __DIR__ . '/orders.json';
-$orders = file_exists($ordersFile) ? json_decode(file_get_contents($ordersFile), true) : [];
+header("X-author=Hung Truong");
 
+// Kết nối SQL
+$host = 'localhost';
+$dbname = 'menu_db';
+$username = 'root';
+$password = '';
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die('Kết nối thất bại: ' . htmlspecialchars($e->getMessage()));
+}
+// ordedr check
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');
     $phone = trim($_POST['phone'] ?? '');
@@ -31,8 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'status' => 'Chờ xác nhận',
             'created_at' => date('Y-m-d H:i:s')
         ];
-        $orders[] = $order;
-        file_put_contents($ordersFile, json_encode($orders, JSON_UNESCAPED_UNICODE));
+        $stmt = $pdo->prepare("INSERT INTO orders (id, name, phone, drink, topping, sugar, ice, address, total, status, created_at) VALUES (:id, :name, :phone, :drink, :topping, :sugar, :ice, :address, :total, :status, :created_at)");
+        $stmt->execute($order);
         $_SESSION['order_id'] = $order['id'];   
         header('Location: track.php?phone=' . urlencode($phone));
         exit;

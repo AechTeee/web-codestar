@@ -1,10 +1,14 @@
 <?php
+header("X-author=Hung Truong");
+
 session_start();
+
+// login check 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = trim($_POST['username'] ?? '');
     $pass = trim($_POST['password'] ?? '');
-    // Simple admin credentials (change as needed)
+    // tai khoan admin
     if ($user === 'admin' && $pass === 'admin') {
         $_SESSION['admin_logged_in'] = true;
         $_SESSION['admin_user'] = $user;
@@ -18,6 +22,7 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
     header('Location: admin.php'); exit;
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>

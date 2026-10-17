@@ -1,15 +1,19 @@
 <?php
+header("X-author=Hung Truong");
+
 session_start();
-// === login check ===
+// login check
 if (empty($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header('Location: login.php'); exit;
 }
-// === Logout ===
+
+// Logout 
 if (($_GET['action'] ?? '') === 'logout') {
     $_SESSION = []; session_destroy();
     header('Location: login.php'); exit;
 }
-// === Kết nối SQL ===
+
+// Kết nối SQL
 $host = 'localhost';
 $dbname = 'menu_db';
 $username = 'root';
@@ -21,7 +25,7 @@ try {
     die('Kết nối thất bại: ' . htmlspecialchars($e->getMessage()));
 }
 
-// ---- Ensure orders table exists ----
+// ---- tao bang order neu chua co ----
 $pdo->exec("CREATE TABLE IF NOT EXISTS orders (
     id VARCHAR(20) PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -36,7 +40,7 @@ $pdo->exec("CREATE TABLE IF NOT EXISTS orders (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
 
-// ---- Handle actions ----
+// ---- CRUD ----
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
 
 if ($action === 'add_menu' && $_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -61,10 +65,12 @@ if ($action === 'update_status' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: admin.php?tab=orders&msg=cap_nhat_ok'); exit;
 }
 
+// lay du lieu tu sql
 $tab = $_GET['tab'] ?? 'menu';
 $menuItems = $pdo->query("SELECT * FROM menu_items ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
 $orders = $pdo->query("SELECT * FROM orders ORDER BY created_at DESC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>

@@ -1,3 +1,7 @@
+<?php
+header("X-author=Hung Truong");
+?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
