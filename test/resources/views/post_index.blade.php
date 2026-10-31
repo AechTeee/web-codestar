@@ -2,8 +2,6 @@
 
 @section('title', 'index')
 
-
-
 @section('content')
 
     <h1>Post Index</h1>

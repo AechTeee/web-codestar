@@ -6,10 +6,11 @@ use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Models\Users;
-use 
+use Illuminate\Support\Facades\Mail;
 
-Route::get('/mail', function()Ơ
-    Mail::to(''))
+Route::get('/mail', function () {
+    Mail::to('');
+});
 
 Route::get('/post',[PostController::class,'index'])->name('post.index');
 Route::get('/post/create',[PostController::class,'create'])->name('post.create');

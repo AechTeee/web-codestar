@@ -1,6 +1,5 @@
 @extends('Layout.app')
 
-
 @section('content')
     <h1>Post Show</h1>
     <ul>

@@ -7,13 +7,19 @@ use Illuminate\Support\Facedes\DB;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Auth;
+use Illuminate\Support\Gate;
+use Illuminate\Support\Log;
+
 
 class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
-        return view('post_index', ['posts'=>$posts]);
+        $posts = Post::with('user')->get();
+        $user = Auth::user();
+        Log::critical('daily check info: ' . $user?->name ?? 'truong' , ['user'=>$user]);
+        return view('post_index', ['posts' => $posts]);
     }
 
     public function show($id)
@@ -32,15 +38,13 @@ class PostController extends Controller
         $post = new Post();
 
         $file = $request->file('image_file');
-        if ($file) {
-            $file_name = date('Ymd') . random_int(10000, 10000000) . '.' . $file->getClientOriginalExtension();
-            $file->move('upload', $file_name);
-            $post->image = $file_name;
-        }
+        $file_name = date('Ymd') . random_int(10000, 10000000) . '.' . $file->getClientOriginalExtension();
+        $file->move('upload', $file_name); // /upload/{{ filename }}
         $post->user_id = 2;
         $post->slug = Str::slug($request->title);
-        $post->title = $request->title;
-        $post->content = $request->content;
+        $post->title = $request->title ?? 'default';
+        $post->content = $request->content ?? 'default';
+        $post->file_path = 'upload/' . $file_name;
         $post->save();
         return redirect()->route('post.index');
     }
