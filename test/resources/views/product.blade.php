@@ -9,23 +9,27 @@
 	    <div class="col-md-8 col-md-offset-2">
 	        
     		<h1>Create post</h1>
+
+			@if(!empty($message))
+			<h2> {{ $message }} </h2>
+			@endif
     		
     		<form action="/" method="POST">
     		    
     		    <div class="form-group has-error">
     		        <label for="slug">Slug <span class="require">*</span> <small>(This field use in url path.)</small></label>
-    		        <input type="text" class="form-control" name="slug" />
+    		        <input type="text" class="form-control" name="slug" value = "{{ old('slug') }}" />
     		        <span class="help-block">Field not entered!</span>
     		    </div>
     		    
     		    <div class="form-group">
     		        <label for="title">Title <span class="require">*</span></label>
-    		        <input type="text" class="form-control" name="title" />
+    		        <input type="text" class="form-control" name="title" value = "{{ old('title') }}" />
     		    </div>
     		    
     		    <div class="form-group">
     		        <label for="description">Description</label>
-    		        <textarea rows="5" class="form-control" name="description" ></textarea>
+    		        <textarea rows="5" class="form-control" name="description" >{{ old('description') }}</textarea>
     		    </div>
     		    
     		    <div class="form-group">

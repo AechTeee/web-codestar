@@ -5,6 +5,10 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -13,7 +17,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $demoUsers = [
+        $users = [
             [
                 'name' => 'Nguyễn Văn An (Admin)',
                 'email' => 'admin@example.com',
@@ -76,7 +80,7 @@ class UserSeeder extends Seeder
             ],
         ];
 
-        foreach ($demoUsers as $user) {
+        foreach ($users as $user) {
             User::updateOrCreate(
                 ['email' => $user['email']],
                 $user

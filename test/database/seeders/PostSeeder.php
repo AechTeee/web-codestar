@@ -7,6 +7,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PostSeeder extends Seeder
 {
@@ -15,7 +18,6 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        // Đảm bảo có sẵn User trước khi tạo Post
         if (User::count() === 0) {
             $this->call(UserSeeder::class);
         }

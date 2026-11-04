@@ -8,7 +8,7 @@ class bt2controller extends Controller
 {
     public function index()
     {
-        return view('bt2');
+        return view('product');
     }
 
     public function create(Request $request){
@@ -16,11 +16,11 @@ class bt2controller extends Controller
         $slug = $request->input('slug');
         $description = $request->input('description');
 
-        if(is_null($title) && is_null($slug) || is_null($description)){
-            return back()->withInput();
+        if (is_null($title) || is_null($slug) || is_null($description)) {
+            return back()->withInput()->with(['message' => 'Phải nhập đủ 3 giá trị']);
         }
 
-        return view('bt2_view',[
+        return view('product_view',[
             'title' => $title,
             'slug' => $slug,
             'description' => $description

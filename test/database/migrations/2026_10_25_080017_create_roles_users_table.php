@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('post', function (Blueprint $table) {
+        Schema::create('role_users', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Role::class);
@@ -26,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('post', function (Blueprint $table) {
-             Schema::dropIfExists('role_users');
-        });
+        Schema::dropIfExists('role_users');
     }
 };

@@ -6,20 +6,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facedes\DB;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Support\Str;
-use Illuminate\Support\Auth;
+use Illuminate\Support\Strl;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Gate;
-use Illuminate\Support\Log;
+use Illuminate\Support\Facades\Log;
 
 
 class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('user')->get();
+        $post = Post::with('user')->get();
         $user = Auth::user();
         Log::critical('daily check info: ' . $user?->name ?? 'truong' , ['user'=>$user]);
-        return view('post_index', ['posts' => $posts]);
+        return view('post_index', ['post' => $post]);
     }
 
     public function show($id)

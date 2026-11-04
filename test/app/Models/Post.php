@@ -8,7 +8,7 @@ class Post extends Model
 {
     protected $table = 'post';
     protected $dates = ['deleted_at'];
-    protected $dateFormat = 'd-m-Y';
+    protected $dateFormat = 'Y-m-d';
 
     public function scopeLavarel($query)
     {
