@@ -22,7 +22,7 @@ class PostSeeder extends Seeder
 
         $userIds = User::pluck('id')->toArray();
 
-        $posts = [
+        $post = [
             [
                 'title' => 'Cài đặt môi trường Laravel 12',
                 'content' => 'Hướng dẫn chi tiết cách cài đặt PHP 8.4, Composer và khởi tạo dự án Laravel 12 trên macOS và Windows.',
@@ -65,7 +65,7 @@ class PostSeeder extends Seeder
             ],
         ];
 
-        foreach ($posts as $index => $item) {
+        foreach ($post as $index => $item) {
             $userId = $userIds[$index % count($userIds)];
             $title = Str::limit($item['title'], 50, '');
             $slug = Str::limit(Str::slug($item['title']), 50, '');

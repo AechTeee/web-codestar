@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $table = 'posts';
-
+    protected $table = 'post';
+    protected $dates = ['deleted_at'];
     protected $dateFormat = 'd-m-Y';
 
     public function scopeLavarel($query)

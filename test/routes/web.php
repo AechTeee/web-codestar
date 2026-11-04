@@ -7,10 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Models\Users;
 use Illuminate\Support\Facades\Mail;
-
-Route::get('/mail', function () {
-    Mail::to('');
-});
+use App\Mail\VerifyEmail;
+use App\Jobs\SendMailJob;
 
 Route::get('/post',[PostController::class,'index'])->name('post.index');
 Route::get('/post/create',[PostController::class,'create'])->name('post.create');
@@ -23,6 +21,11 @@ Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/role', function() {
     User::find(4)->roles()->toggle([1,2,3]);});
 
-Route::get('/404', function(){
-    abort(404);
+Route::get('/mail', function(){
+    SendMailJob::dispatchAfterResponse();
+    return 'Email sent after 1 minute';
     });
+
+Route::get('/404', function() {
+    abort(404);
+});

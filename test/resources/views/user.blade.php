@@ -9,7 +9,7 @@
             <li> id: {{ $user->id }}</li>
             <li> name: {{ $user->name }}</li>
             <li> email: {{ $user->email }}</li>
-            <li> posts: {{ $user->posts->count() }}</li>
+            <li> post: {{ $user->posts->count() }}</li>
             @foreach ($user->posts as $post)
                 <li>title : {{ $post->title }} </li>
             @endforeach

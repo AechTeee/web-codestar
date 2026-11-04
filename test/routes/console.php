@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+Artisan::command('app:send0mail {email} {--bcc=}', function($email, $bcc) {
+    $this->info('Sending mail to ' . $email . ' with bcc: ' . $bcc ?? '');
+});
+
+Schedule::command('app:send-mail four0bulles@gmail.com')->everyMinute();
